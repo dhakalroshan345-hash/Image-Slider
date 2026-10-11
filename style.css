@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap"); /* Done by : Roshan Dhakal */
+
+:root { 
+  --warm: linear-gradient(135deg, #ff6a3d, #ffb347); /* sunrise orange gradient */
+  --glass: rgba(255, 255, 255, 0.2); /* see-through white */
+} 
+* { margin: 0; padding: 0; box-sizing: border-box; } /* removes default gaps so sizes are easy to predict */
+body { /* the whole page background */
+  min-height: 100vh; /* at least the full screen height */
+  display: grid; 
+  place-items: center; /* puts the content in the middle */
+  font-family: "Jost", sans-serif; /* applies the imported font */
+  color: #ffffff; /* white text */
+  background: linear-gradient(135deg, #29b8df, #a116c4 55%, #18c99a); 
+} 
+.page { width: min(92%, 880px); padding: 1.5rem 0; text-align: center; } /* page column shrinks on small screens */
+.page-title { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 600; margin-bottom: 1rem; } /* title grows and shrinks with the screen */
+.slider { width: 100%; } /* slider takes the full column width */
+
+.slider-window { /* the frame that hides extra photos */
+  position: relative; /* lets arrows and toast sit inside the frame */
+  overflow: hidden; /* anything outside the frame stays invisible */
+  aspect-ratio: 16 / 9; /* wide frame at every size */
+  border-radius: 18px; /* rounded corners */
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4); /* soft shadow under the frame */
+} 
+.slider-track { /* the strip that slides */
+  display: flex; /* lines the photos up in one row */
+  height: 100%; /* same height as the frame */
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); /* smooth start and stop */
+  will-change: transform; /* tells the browser to prepare for movement */
+} 
+.slider-track.no-anim { transition: none; } /* turns the animation off for a hidden jump */
+.slide { position: relative; flex: 0 0 100%; height: 100%; overflow: hidden; } /* every photo is exactly one frame wide */
+.slide img { /* Done by : Roshan Dhakal */
+  display: block; /* removes the small gap below images */
+  width: 100%; max-width: 100%; height: 100%; /* fills the slide */
+  object-fit: cover; /* fills the space without stretching */
+  transition: transform 0.5s ease, filter 0.5s ease; /* smooth hover change */
+} 
+.slide:hover img { transform: scale(1.06); filter: brightness(1.1) saturate(1.2); } /* photo zooms and brightens on hover */
+.slide figcaption { /* name tag at the bottom */
+  position: absolute; left: 0; right: 0; bottom: 0; /* sticks to the bottom edge */
+  padding: 1.6rem 1rem 0.8rem; /* space around the words */
+  text-align: left; font-weight: 500; /* left aligned and a bit bold */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); /* dark fade so the text is readable */
+  transform: translateY(100%); /* hidden below the frame at first */
+  transition: transform 0.4s ease; /* slides up smoothly */
+} 
+.slide:hover figcaption { transform: translateY(0); } /* name tag rises on hover */
+.arrow-btn { /* round arrow buttons */
+  position: absolute; top: 50%; transform: translateY(-50%); /* centred up and down on the frame */
+  z-index: 2; width: 2.6rem; height: 2.6rem; /* sits above the photos, round size */
+  border: none; border-radius: 50%; /* no border, perfect circle */
+  color: #ffffff; background: var(--glass); backdrop-filter: blur(6px); /* frosted glass look */
+  font-size: 1rem; cursor: pointer; /* icon size and hand cursor */
+  transition: background 0.3s, transform 0.3s; /* smooth hover change */
+} 
+.arrow-btn:hover { background: var(--warm); transform: translateY(-50%) scale(1.12); } /* orange colour and a small pop */
+.arrow-left { left: 0.8rem; } /* previous button hugs the left edge */
+.arrow-right { right: 0.8rem; } /* next button hugs the right edge */
+.page-numbers { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; } /* numbers sit in a centred row and wrap if needed */
+.page-number { 
+  width: 2.4rem; height: 2.4rem; /* round size */
+  border: 2px solid rgba(255, 255, 255, 0.6); border-radius: 50%; /* thin white ring */
+  color: #ffffff; background: transparent; /* clear inside */
+  font: 500 1rem "Jost", sans-serif; cursor: pointer; /* font and hand cursor */
+  transition: all 0.3s ease; /* smooth change between states */
+} 
+.page-number:hover { background: var(--glass); } /* light fill on hover */
+.page-number.active { background: var(--warm); border-color: transparent; transform: scale(1.18); box-shadow: 0 4px 14px rgba(255, 106, 61, 0.55); } /* current number is bigger and orange */
+
+.toast { /* the pop-up message */
+  position: absolute; top: 1rem; left: 50%; z-index: 3; /* top middle of the frame */
+  padding: 0.45rem 1.1rem; border-radius: 999px; /* pill shape */
+  font-size: 0.9rem; pointer-events: none; /* never blocks a click */
+  background: rgba(0, 0, 0, 0.65); /* dark background */
+  opacity: 0; transform: translate(-50%, -200%); /* hidden above the frame */
+  transition: opacity 0.3s, transform 0.3s; /* drops in and fades in */
+} /* pop-up ends */
+
+.toast.show { opacity: 1; transform: translate(-50%, 0); } /* visible version of the message */
+
+@media (max-width: 600px) { /* rules for phones and small tablets */
+  .slider-window { aspect-ratio: 4 / 3; border-radius: 12px; } /* taller frame on narrow screens */
+  .arrow-btn { width: 2.1rem; height: 2.1rem; font-size: 0.85rem; } /* smaller arrows */
+  .page-number { width: 2rem; height: 2rem; font-size: 0.85rem; } /* smaller numbers */
+} /* phone rules end */

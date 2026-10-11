@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- keeps the layout correct on phones -->
+  <title>Nepal Photo Slider</title> <!-- title shown on the browser tab.  Done by : Roshan Dhakal -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"> <!-- Font Awesome gives the arrow icons -->
+  <link rel="stylesheet" href="style.css"> <!-- connects the custom styles -->
+</head> 
+<body> <!-- everything visible goes inside the body -->
+  <main class="page"> <!-- centred wrapper for the whole page -->
+    <h1 class="page-title">Nepal in Five Photos</h1> <!-- simple heading above the slider -->
+    <section class="slider" id="nepalSlider"> <!-- slider box, the script fills it -->
+      <div class="slider-window"> <!-- window that only shows one photo -->
+        <div class="slider-track"></div> <!-- long strip that holds every photo -->
+        <button class="arrow-btn arrow-left" aria-label="Previous photo"><i class="fa-solid fa-chevron-left"></i></button> <!-- previous button with an icon -->
+        <button class="arrow-btn arrow-right" aria-label="Next photo"><i class="fa-solid fa-chevron-right"></i></button> <!-- next button with an icon -->
+        <p class="toast"></p> <!-- small message that pops up -->
+      </div> 
+      <div class="page-numbers"></div> 
+    </section>
+  </main> <!-- wrapper ends -->
+  <script src="slider.js"></script> <!-- loads the ImageSlider class first -->
+  <script> /* tiny script that starts the slider */
+    const photoList = [ /* every photo lives in this one list */
+      { file: "https://images.pexels.com/photos/31942059/pexels-photo-31942059.jpeg", title: "Swoyambhunath Stupa" }, 
+      { file: "https://images.pexels.com/photos/13746894/pexels-photo-13746894.jpeg", title: "Pashupatinath Temple" }, 
+      { file: "https://images.pexels.com/photos/11408378/pexels-photo-11408378.jpeg", title: "Kathmandu Durbar Square" }, 
+      { file: "https://images.pexels.com/photos/37836764/pexels-photo-37836764.jpeg", title: "Pokhara lakeside" }, 
+      { file: "https://images.pexels.com/photos/38086314/pexels-photo-38086314.jpeg", title: "Chandragiri Hill" } 
+    ]; 
+    new ImageSlider("#nepalSlider", photoList); /* builds the slider inside the box */
+  </script> 
+</body> 
+</html> 
